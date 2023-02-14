@@ -1,0 +1,76 @@
+basePath: /
+definitions:
+  body_types.SendMessage:
+    properties:
+      message:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    url: https://github.com/Mrpye/cisco-webex-bot
+  description: cisco-webex-bot is a CLI application written in Golang that gives the
+    ability to send notifications to a Webex room that the bot is subscribed to via
+    a rest api
+  license:
+    name: Apache 2.0 licensed
+    url: https://github.com/Mrpye/cisco-webex-bot/blob/main/LICENSE
+  title: cisco-webex-bot
+  version: "1.0"
+paths:
+  /:
+    get:
+      operationId: check-api-endpoint
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: Check API Endpoint
+  /send_message:
+    post:
+      operationId: post-send-message-text
+      parameters:
+      - description: query params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/body_types.SendMessage'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: message sent
+          schema:
+            type: string
+        "404":
+          description: error
+          schema:
+            type: string
+      summary: Send  a message to Webex text format
+  /send_message_md:
+    post:
+      operationId: post-send-message-markdown
+      parameters:
+      - description: query params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/body_types.SendMessage'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: message sent
+          schema:
+            type: string
+        "404":
+          description: error
+          schema:
+            type: string
+      summary: Send  a message to Webex markdown format
+swagger: "2.0"
