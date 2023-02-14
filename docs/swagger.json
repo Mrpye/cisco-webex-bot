@@ -1,0 +1,114 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "cisco-webex-bot is a CLI application written in Golang that gives the ability to send notifications to a Webex room that the bot is subscribed to via a rest api",
+        "title": "cisco-webex-bot",
+        "contact": {
+            "url": "https://github.com/Mrpye/cisco-webex-bot"
+        },
+        "license": {
+            "name": "Apache 2.0 licensed",
+            "url": "https://github.com/Mrpye/cisco-webex-bot/blob/main/LICENSE"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Check API Endpoint",
+                "operationId": "check-api-endpoint",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/send_message": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Send  a message to Webex text format",
+                "operationId": "post-send-message-text",
+                "parameters": [
+                    {
+                        "description": "query params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/body_types.SendMessage"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "message sent",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/send_message_md": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Send  a message to Webex markdown format",
+                "operationId": "post-send-message-markdown",
+                "parameters": [
+                    {
+                        "description": "query params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/body_types.SendMessage"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "message sent",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "body_types.SendMessage": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
